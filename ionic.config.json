@@ -1,0 +1,7 @@
+{
+  "name": "CadastroApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
