@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavController, ToastController } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -8,22 +8,40 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
   standalone: false,
 })
-export class LoginPage{
-  email = '';
-  password = '';
+export class LoginPage {
 
-  constructor(  private storageService: StorageService,
-    private alertController: AlertController) { }
+  email: string = '';
+  password: string = '';
+
+  constructor(
+    private storageService: StorageService,
+    private navCtrl: NavController,
+    private toastCtrl: ToastController
+  ) {}
 
   async login() {
-    const isValid = await this.storageService.validateLogin(this.email, this.password);
-    const alert = await this.alertController.create({
-      header: isValid ? 'Sucesso' : 'Erro',
-      message: isValid ? 'Login realizado com sucesso!' : 'Email ou senha inválidos.',
-      buttons: ['OK']
-    });
-    await alert.present();
+    if (!this.email || !this.password) {
+      const toast = await this.toastCtrl.create({
+        message: 'Preencha todos os campos!',
+        duration: 2000,
+        color: 'warning'
+      });
+      await toast.present();
+      return;
+    }
+
+    const user = await this.storageService.getUser(this.email);
+
+    if (user && user.password === this.password) {
+      // Login válido, redireciona para controle de serviço
+      this.navCtrl.navigateRoot('/tela-controle-servico');
+    } else {
+      const toast = await this.toastCtrl.create({
+        message: 'Email ou senha invalidos!',
+        duration: 3000,
+        color: 'danger'
+      });
+      await toast.present();
+    }
   }
 }
-
-

@@ -1,13 +1,37 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>TelaControleServico</ion-title>
+    <ion-title>Controle de Serviços</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">TelaControleServico</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input placeholder="Título" [(ngModel)]="novoServico.titulo"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-textarea placeholder="Descrição" [(ngModel)]="novoServico.descricao"></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Data</ion-label>
+    <ion-datetime-button datetime="dataServico"></ion-datetime-button>
+    <ion-datetime id="dataServico" presentation="date" [(ngModel)]="novoServico.data"></ion-datetime>
+  </ion-item>
+
+  <ion-button expand="full" (click)="adicionarServico()">Adicionar Serviço</ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let servico of servicos">
+      <ion-label>
+        <h2>{{ servico.titulo }}</h2>
+        <p>{{ servico.descricao }}</p>
+        <p><strong>Data:</strong> {{ servico.data | date }}</p>
+      </ion-label>
+      <ion-button color="danger" slot="end" (click)="excluirServico(servico.id)">Excluir</ion-button>
+    </ion-item>
+     <ion-button (click)="logout()">
+        Sair
+      </ion-button>
+  </ion-list>
 </ion-content>
