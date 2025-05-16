@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-input placeholder="Email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="password" placeholder="Senha" [(ngModel)]="password"></ion-input>
+  </ion-item>
+  <ion-button expand="full" (click)="login()">Entrar</ion-button>
+  <ion-text color="medium">
+  Não tem uma conta?
+  <a routerLink="/home">Criar conta</a>
+</ion-text>
+
+</ion-content>

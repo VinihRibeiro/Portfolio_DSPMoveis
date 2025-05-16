@@ -8,8 +8,16 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'tela-controle-servico',
+    loadChildren: () => import('./tela-controle-servico/tela-controle-servico.module').then( m => m.TelaControleServicoPageModule)
   },
 ];
 
