@@ -19,7 +19,7 @@
     <ion-datetime id="dataServico" presentation="date" [(ngModel)]="novoServico.data"></ion-datetime>
   </ion-item>
 
-  <ion-button expand="full" (click)="adicionarServico()">Adicionar Serviço</ion-button>
+  <ion-button (click)="adicionarServico()" id="AddServico" expand="block" color="medium">Adicionar Serviço</ion-button>
 
   <ion-list>
     <ion-item *ngFor="let servico of servicos">
@@ -30,7 +30,7 @@
       </ion-label>
       <ion-button color="danger" slot="end" (click)="excluirServico(servico.id)">Excluir</ion-button>
     </ion-item>
-     <ion-button (click)="logout()">
+     <ion-button (click)="logout()" color="danger" expand="block">
         Sair
       </ion-button>
   </ion-list>
